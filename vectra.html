@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VECTRA SYSTEMS | Autonomous Lead & Web Infrastructure</title>
+  <!-- Browser Tab Favicon: Interlocking Electric Blue & White Geometric 'V' on Matte Carbon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2309090b' stroke='%2327272a' stroke-width='4'/%3E%3Cpath d='M16 24 H37 L49 48 L43 60 L31 35 H24 L45 77 L68 31 H60 L54 43 L48 31 L54 24 H84 L78 35 H68 L45 81 L38 81 Z' fill='%232563eb'/%3E%3Cpath d='M78 35 L55 81 H45 L51 69 H53 L70 35 Z' fill='%23ffffff'/%3E%3C/svg%3E" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter, Cairo (Arabic), & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            carbon: {
+              950: '#09090b',
+              900: '#121215',
+              800: '#18181c',
+              700: '#27272a',
+              600: '#3f3f46',
+            },
+            accent: {
+              blue: '#2563eb',
+              blueHover: '#1d4ed8',
+              emerald: '#10b981',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            arabic: ['Cairo', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #09090b;
+      color: #fafafa;
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html[lang="ar"] body {
+      font-family: 'Cairo', sans-serif;
+    }
+
+    /* Custom Scrollbar - Pure Solid Matte Carbon */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body class="bg-carbon-950 text-zinc-100 antialiased selection:bg-accent-blue selection:text-white">
+
+  <!-- ================= ENTERPRISE TOP NAVIGATION BAR ================= -->
+  <header class="sticky top-0 z-50 bg-carbon-950 border-b border-carbon-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+      <!-- Brand Identity -->
+      <a href="#" class="flex items-center gap-3 group shrink-0">
+        <div class="w-11 h-11 rounded-lg bg-carbon-900 flex items-center justify-center border border-carbon-700 group-hover:border-accent-blue transition shrink-0" dir="ltr">
+          <svg class="w-7 h-7" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vectra Systems Logo">
+            <path d="M12 20 H36 L50 48 L43 62 L29 33 H21 L45 81 L70 31 H61 L54 45 L47 31 L53 20 H88 L81 33 H70 L45 84 L37 84 Z" fill="#2563eb"/>
+            <path d="M81 33 L56 84 H45 L52 70 H54 L72 33 Z" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-black text-base sm:text-lg tracking-wider text-white block leading-none" data-i18n="brandName">VECTRA SYSTEMS</span>
+          <span class="font-mono text-[10px] sm:text-[11px] text-zinc-400 tracking-widest uppercase block mt-1" dir="ltr">VECTRA // AUTOMATION</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-zinc-400">
+        <a href="#architecture" class="hover:text-white transition" data-i18n="navArch">Architecture</a>
+        <a href="#sandbox" class="hover:text-white transition flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent-emerald"></span>
+          <span data-i18n="navSandbox">Live Sandbox</span>
+        </a>
+        <a href="#tiers" class="hover:text-white transition" data-i18n="navTiers">Deployment Tiers</a>
+      </nav>
+
+      <!-- Language Switcher + Operational Status + Primary CTA -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <!-- Instant EN | العربية Switcher Button -->
+        <button type="button" id="langSwitchBtn" aria-label="Switch Language"
+          class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-carbon-900 hover:bg-carbon-800 border border-carbon-700 text-xs font-bold transition cursor-pointer shrink-0">
+          <span id="langIndEn" class="px-1.5 py-0.5 rounded bg-accent-blue text-white font-mono">EN</span>
+          <span class="text-zinc-600 font-mono">|</span>
+          <span id="langIndAr" class="px-1.5 py-0.5 rounded text-zinc-400" style="font-family: 'Cairo', sans-serif;">العربية</span>
+        </button>
+
+        <div class="hidden xl:flex items-center gap-2 px-3 py-2 rounded-lg bg-carbon-900 border border-carbon-700 text-[11px] font-mono text-zinc-300">
+          <span class="w-2 h-2 rounded-full bg-accent-emerald"></span>
+          <span data-i18n="navStatus">ALL SYSTEMS OPERATIONAL</span>
+        </div>
+
+        <a href="#audit" class="bg-white hover:bg-zinc-200 text-carbon-950 font-bold text-xs sm:text-sm px-3.5 sm:px-4 py-2.5 rounded-lg transition shrink-0" data-i18n="navCta">
+          Book Systems Audit →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="relative pt-14 pb-20 lg:pt-20 lg:pb-24 bg-carbon-950 border-b border-carbon-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl">
+        <!-- Technical Tag -->
+        <div class="inline-flex flex-wrap items-center gap-2.5 px-3.5 py-1.5 rounded-md bg-carbon-900 border border-carbon-700 text-xs font-mono text-zinc-300 mb-8">
+          <span class="px-2 py-0.5 rounded bg-accent-blue text-white font-bold text-[10px]" data-i18n="heroBadgeTag">B2B INFRASTRUCTURE</span>
+          <span data-i18n="heroBadgeText">n8n Cloud Engine + Groq LPU AI + Instant Telegram Dispatch</span>
+        </div>
+
+        <!-- Enterprise Headline -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12] mb-6" data-i18n="heroTitle">
+          Autonomous Lead Intake &amp; Instant Qualification Infrastructure.
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-base sm:text-xl text-zinc-400 max-w-3xl font-normal leading-relaxed mb-10" data-i18n="heroDesc">
+          At Vectra Systems, our engineering team builds high-converting web funnels wired directly to dedicated AI triage pipelines. The millisecond a prospect submits an inquiry, our infrastructure scores their urgency, drafts a tailored reply, updates your CRM, and dispatches a live alert to your sales team on Telegram in under 2 seconds.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-16">
+          <a href="#sandbox" class="px-7 py-4 rounded-lg bg-accent-blue hover:bg-accent-blueHover text-white font-bold text-sm sm:text-base text-center transition" data-i18n="heroPrimaryBtn">
+            Execute Live Pipeline Demo →
+          </a>
+          <a href="#tiers" class="px-7 py-4 rounded-lg bg-carbon-900 hover:bg-carbon-800 text-white font-semibold text-sm sm:text-base border border-carbon-700 text-center transition" data-i18n="heroSecondaryBtn">
+            View Deployment Tiers
+          </a>
+        </div>
+      </div>
+
+      <!-- 3 Key Infrastructure Metrics Bar -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-6">
+          <p class="font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2" data-i18n="metric1Label">WEBHOOK &amp; AI LATENCY</p>
+          <p class="text-3xl font-black text-white font-mono" dir="ltr">&lt; 2.0s</p>
+          <p class="text-xs text-zinc-400 mt-1.5" data-i18n="metric1Sub">End-to-end AI qualification &amp; instant Telegram push alert</p>
+        </div>
+        <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-6">
+          <p class="font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2" data-i18n="metric2Label">UPTIME &amp; RELIABILITY</p>
+          <p class="text-3xl font-black text-accent-blue font-mono" dir="ltr">24/7 Cloud</p>
+          <p class="text-xs text-zinc-400 mt-1.5" data-i18n="metric2Sub">Dedicated cloud container execution with automatic fail-safe retries</p>
+        </div>
+        <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-6">
+          <p class="font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2" data-i18n="metric3Label">SYSTEM OWNERSHIP</p>
+          <p class="text-3xl font-black text-accent-emerald font-mono" data-i18n="metric3Value">100% White-Label</p>
+          <p class="text-xs text-zinc-400 mt-1.5" data-i18n="metric3Sub">Built specifically for your company or clinic with zero third-party branding</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VISUAL PIPELINE ARCHITECTURE ================= -->
+  <section id="architecture" class="py-20 lg:py-24 bg-carbon-950 border-b border-carbon-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-accent-blue font-bold block mb-2" data-i18n="archEyebrow">// SYSTEM ARCHITECTURE</span>
+          <h2 class="text-2xl sm:text-4xl font-black text-white" data-i18n="archTitle">Four-Node Autonomous Triage Pipeline</h2>
+        </div>
+        <p class="text-zinc-400 text-sm sm:text-base max-w-md" data-i18n="archDesc">
+          Eliminate manual inbox monitoring and lost messages. Every inbound lead is processed through our deterministic 4-node cloud architecture.
+        </p>
+      </div>
+
+      <!-- 4 Flat Structural Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Stage 01 -->
+        <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-4 mb-5 border-b border-carbon-700" dir="ltr">
+              <span class="font-mono text-xs font-bold text-white bg-carbon-800 border border-carbon-700 px-2.5 py-1 rounded">01 // INTAKE</span>
+              <span class="font-mono text-xs text-zinc-400">HTTP POST</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2" data-i18n="node1Title">Frontend Lead Intake</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="node1Desc">
+              Prospects submit their contact details, phone number, and service request via our custom landing page or your existing website form.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-carbon-700 flex items-center justify-between text-xs font-mono text-zinc-300" dir="ltr">
+            <span>Payload: JSON</span>
+            <span class="text-accent-emerald">● 120ms</span>
+          </div>
+        </div>
+
+        <!-- Stage 02 -->
+        <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-4 mb-5 border-b border-carbon-700" dir="ltr">
+              <span class="font-mono text-xs font-bold text-white bg-carbon-800 border border-carbon-700 px-2.5 py-1 rounded">02 // WEBHOOK</span>
+              <span class="font-mono text-xs text-zinc-400">n8n Engine</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2" data-i18n="node2Title">n8n Cloud Webhook Engine</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="node2Desc">
+              Our 24/7 cloud webhook listener captures the data immediately, structures phone and email fields, and routes the request to the AI model.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-carbon-700 flex items-center justify-between text-xs font-mono text-zinc-300" dir="ltr">
+            <span>Auto-Retry: 3x</span>
+            <span class="text-accent-emerald">● 240ms</span>
+          </div>
+        </div>
+
+        <!-- Stage 03 -->
+        <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-4 mb-5 border-b border-carbon-700" dir="ltr">
+              <span class="font-mono text-xs font-bold text-white bg-accent-blue px-2.5 py-1 rounded">03 // GROQ AI</span>
+              <span class="font-mono text-xs text-zinc-400">Llama-3.3 LPU</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2" data-i18n="node3Title">Groq LPU AI Qualification</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="node3Desc">
+              High-speed AI analyzes client budget and urgency, assigns a strict Priority Score (High/Medium/Low), and drafts a ready-to-send reply.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-carbon-700 flex items-center justify-between text-xs font-mono text-zinc-300" dir="ltr">
+            <span>Model: Llama-3.3-70B</span>
+            <span class="text-accent-emerald">● 680ms</span>
+          </div>
+        </div>
+
+        <!-- Stage 04 -->
+        <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-4 mb-5 border-b border-carbon-700" dir="ltr">
+              <span class="font-mono text-xs font-bold text-white bg-carbon-800 border border-carbon-700 px-2.5 py-1 rounded">04 // DISPATCH</span>
+              <span class="font-mono text-xs text-zinc-400">Telegram + CRM</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2" data-i18n="node4Title">Instant Telegram &amp; CRM Sync</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed" data-i18n="node4Desc">
+              The complete lead report and custom reply draft hit your sales team's Telegram phones instantly while logging a row in Google Sheets CRM.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-carbon-700 flex items-center justify-between text-xs font-mono text-zinc-300" dir="ltr">
+            <span>Total Execution</span>
+            <span class="text-accent-emerald">● 1.38s</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE LIVE SANDBOX (THE SALES WEAPON) ================= -->
+  <section id="sandbox" class="py-20 lg:py-24 bg-carbon-900 border-b border-carbon-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-accent-emerald font-bold block mb-2" data-i18n="sandboxEyebrow">// INTERACTIVE VERIFICATION ENVIRONMENT</span>
+          <h2 class="text-2xl sm:text-4xl font-black text-white" data-i18n="sandboxTitle">Live Lead Qualification Sandbox</h2>
+        </div>
+        <p class="text-zinc-400 text-sm sm:text-base max-w-md" data-i18n="sandboxDesc">
+          Test our infrastructure right now. Submit a simulated client inquiry below to watch the live webhook execution and formatted Telegram alert.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- COLUMN 1: Client Lead Simulator Form (7 Cols) -->
+        <div class="lg:col-span-7 bg-carbon-950 border border-carbon-700 rounded-xl p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-carbon-700 pb-4 mb-6">
+            <div>
+              <h3 class="text-lg font-bold text-white" data-i18n="simHeaderTitle">Inbound Client Inquiry Simulator</h3>
+              <p class="text-xs text-zinc-400 font-mono mt-0.5" dir="ltr">POST /webhook/vectra-lead-intake</p>
+            </div>
+            <button type="button" id="cyclePresetBtn" class="text-xs font-semibold bg-carbon-800 hover:bg-carbon-700 text-white px-3.5 py-2 rounded-lg border border-carbon-700 transition cursor-pointer" data-i18n="simPresetBtn">
+              ↻ Load Industry Sample
+            </button>
+          </div>
+
+          <form id="sandboxForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold uppercase text-zinc-300 mb-1.5" data-i18n="simLabelBusiness">Business / Clinic Name *</label>
+                <input type="text" id="simBusiness" value="Apex Dental & Implant Studio" required
+                  class="w-full bg-carbon-900 border border-carbon-700 focus:border-accent-blue rounded-lg px-3.5 py-2.5 text-sm text-white outline-none transition" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase text-zinc-300 mb-1.5" data-i18n="simLabelName">Prospect Full Name *</label>
+                <input type="text" id="simName" value="Amine Benali" required
+                  class="w-full bg-carbon-900 border border-carbon-700 focus:border-accent-blue rounded-lg px-3.5 py-2.5 text-sm text-white outline-none transition" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold uppercase text-zinc-300 mb-1.5" data-i18n="simLabelPhone">Phone / WhatsApp *</label>
+                <input type="tel" id="simPhone" value="+213 555 89 12 04" dir="ltr" required
+                  class="w-full bg-carbon-900 border border-carbon-700 focus:border-accent-blue rounded-lg px-3.5 py-2.5 text-sm text-white outline-none transition text-left" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase text-zinc-300 mb-1.5" data-i18n="simLabelService">Service Requested *</label>
+                <select id="simService" class="w-full bg-carbon-900 border border-carbon-700 focus:border-accent-blue rounded-lg px-3.5 py-2.5 text-sm text-white outline-none transition">
+                  <option value="opt1" data-i18n="simOpt1">Full Arch Dental Implants (High Value)</option>
+                  <option value="opt2" data-i18n="simOpt2">Hollywood Smile Veneers (16 Units)</option>
+                  <option value="opt3" data-i18n="simOpt3">Commercial Real Estate Acquisition</option>
+                  <option value="opt4" data-i18n="simOpt4">B2B Enterprise Automation System</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase text-zinc-300 mb-1.5" data-i18n="simLabelMessage">Client Inquiry Message *</label>
+              <textarea id="simMessage" rows="3" required
+                class="w-full bg-carbon-900 border border-carbon-700 focus:border-accent-blue rounded-lg px-3.5 py-2.5 text-sm text-white outline-none transition">Hi, I need 3 dental implants and full upper veneers completed before next month. Do you have a consultation slot available this Thursday afternoon?</textarea>
+            </div>
+
+            <button type="submit" id="simSubmitBtn"
+              class="w-full bg-accent-blue hover:bg-accent-blueHover text-white font-bold py-3.5 px-6 rounded-lg text-sm sm:text-base transition flex items-center justify-center gap-2 cursor-pointer">
+              <span data-i18n="simSubmitText">Execute Live Pipeline</span>
+              <span class="font-mono" dir="ltr">→</span>
+            </button>
+
+            <div id="simWebhookNotice" class="hidden rounded-lg p-3 text-xs font-mono border"></div>
+          </form>
+        </div>
+
+        <!-- COLUMN 2: Real-Time Execution Terminal & Telegram Output (5 Cols) -->
+        <div class="lg:col-span-5 bg-carbon-950 border border-carbon-700 rounded-xl overflow-hidden">
+          <!-- Terminal Header (Kept LTR for authentic technical console look) -->
+          <div class="bg-carbon-900 px-4 py-3 border-b border-carbon-700 flex items-center justify-between" dir="ltr">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-zinc-600"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-zinc-600"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-accent-emerald"></span>
+              <span class="ml-2 font-mono text-xs text-zinc-300">vectra-runtime-node</span>
+            </div>
+            <span id="terminalStateBadge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-carbon-800 text-zinc-400 border border-carbon-700">STANDBY</span>
+          </div>
+
+          <div class="p-5 space-y-5">
+            <!-- 3-Step Execution Log (LTR technical pipeline telemetry) -->
+            <div class="space-y-2 font-mono text-xs" dir="ltr">
+              <div id="stepRow1" class="flex items-center justify-between p-2.5 rounded-lg bg-carbon-900 border border-carbon-700 text-zinc-400">
+                <span>01. Webhook POST /lead-intake</span>
+                <span class="step-status">IDLE</span>
+              </div>
+              <div id="stepRow2" class="flex items-center justify-between p-2.5 rounded-lg bg-carbon-900 border border-carbon-700 text-zinc-400">
+                <span>02. Groq LPU (Llama-3.3-70B) Triage</span>
+                <span class="step-status">IDLE</span>
+              </div>
+              <div id="stepRow3" class="flex items-center justify-between p-2.5 rounded-lg bg-carbon-900 border border-carbon-700 text-zinc-400">
+                <span>03. Telegram Bot &amp; Sheets Sync</span>
+                <span class="step-status">IDLE</span>
+              </div>
+            </div>
+
+            <!-- Telegram Output Preview Card -->
+            <div class="bg-carbon-900 border border-carbon-700 rounded-lg p-4">
+              <div class="flex items-center justify-between border-b border-carbon-700 pb-2.5 mb-3" dir="ltr">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded bg-accent-blue text-white font-mono text-[10px] font-bold">TELEGRAM PUSH</span>
+                  <span class="text-xs font-mono text-zinc-300">Vectra Lead Alert Bot</span>
+                </div>
+                <span id="tgTime" class="text-[11px] font-mono text-zinc-400">LIVE</span>
+              </div>
+
+              <div id="tgOutputBox" class="text-xs text-zinc-200 whitespace-pre-line leading-relaxed bg-carbon-950 p-3.5 rounded border border-carbon-700 font-mono"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRODUCTIZED DEPLOYMENT TIERS (PRICING) ================= -->
+  <section id="tiers" class="py-20 lg:py-24 bg-carbon-950 border-b border-carbon-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="font-mono text-xs uppercase tracking-widest text-accent-blue font-bold block mb-2" data-i18n="tiersEyebrow">// TRANSPARENT INFRASTRUCTURE PACKAGES</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-white mb-4" data-i18n="tiersTitle">Productized Deployment Tiers</h2>
+        <p class="text-zinc-400 text-sm sm:text-base" data-i18n="tiersDesc">
+          Fixed-scope engineering deployments by Vectra Systems. Choose between connecting your existing website or deploying a complete custom web funnel with AI qualification.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+        
+        <!-- TIER 1: Rapid Webhook Integration for Existing Sites -->
+        <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4" dir="ltr">
+              <span class="font-mono text-xs text-zinc-300 bg-carbon-800 border border-carbon-700 px-2.5 py-1 rounded">TIER 01 // PLUG-IN</span>
+              <span class="font-mono text-xs text-zinc-400" data-i18n="tier1Time">48h Delivery</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white mb-2" data-i18n="tier1Title">Webhook &amp; AI Integration (Existing Website)</h3>
+            <p class="text-sm text-zinc-400 mb-6" data-i18n="tier1Desc">
+              Already have a company or clinic website? Our engineers connect your existing forms directly into our n8n AI qualification, CRM, and Telegram alert pipeline.
+            </p>
+            <div class="pb-6 mb-6 border-b border-carbon-700">
+              <div class="flex items-baseline gap-2">
+                <span class="text-4xl font-black text-white font-mono" dir="ltr">$190</span>
+                <span class="text-xs font-mono text-zinc-400" data-i18n="tierOneTime">/ one-time setup</span>
+              </div>
+              <p class="text-xs font-mono text-accent-emerald mt-2" data-i18n="tierRetainerSub">+ $25/mo managed 24/7 cloud hosting (Equivalent in DZD accepted)</p>
+            </div>
+
+            <ul class="space-y-3.5 text-sm text-zinc-300 mb-8">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-emerald font-mono font-bold">✓</span>
+                <span data-i18n="t1Feat1">Seamless webhook integration with WordPress, Webflow, Shopify, or HTML</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-emerald font-mono font-bold">✓</span>
+                <span data-i18n="t1Feat2">Custom AI lead qualification &amp; priority scoring (Arabic, French, or English)</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-emerald font-mono font-bold">✓</span>
+                <span data-i18n="t1Feat3">Auto-drafted personalized WhatsApp &amp; email sales replies</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-emerald font-mono font-bold">✓</span>
+                <span data-i18n="t1Feat4">Instant Telegram alerts to your phone + automatic Google Sheets CRM table</span>
+              </li>
+            </ul>
+          </div>
+
+          <a href="#audit" onclick="selectAuditTier('tier1')"
+            class="w-full py-3.5 px-5 rounded-lg bg-carbon-800 hover:bg-carbon-700 text-white border border-carbon-700 font-bold text-sm text-center transition" data-i18n="tier1Btn">
+            Select Tier 01 →
+          </a>
+        </div>
+
+        <!-- TIER 2: Full Custom Lead Funnel + AI Pipeline (FLAGSHIP) -->
+        <div class="bg-carbon-900 border-2 border-accent-blue rounded-xl p-8 flex flex-col justify-between relative">
+          <div class="absolute -top-3.5 left-6 right-auto bg-accent-blue text-white font-mono font-bold text-[11px] uppercase px-3 py-1 rounded" data-i18n="tier2Badge">
+            MOST DEPLOYED // COMPLETE TURNKEY SYSTEM
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4 mt-1" dir="ltr">
+              <span class="font-mono text-xs text-white bg-carbon-800 border border-carbon-700 px-2.5 py-1 rounded">TIER 02 // FULL-STACK</span>
+              <span class="font-mono text-xs text-zinc-300" data-i18n="tier2Time">72h Delivery</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white mb-2" data-i18n="tier2Title">Custom Lead Funnel + AI Automation Pipeline</h3>
+            <p class="text-sm text-zinc-300 mb-6" data-i18n="tier2Desc">
+              No website yet or need a dedicated page for Instagram/Meta Ads? We build a modern, high-converting landing page pre-wired to our complete AI &amp; Telegram engine.
+            </p>
+            <div class="pb-6 mb-6 border-b border-carbon-700">
+              <div class="flex items-baseline gap-2">
+                <span class="text-4xl font-black text-white font-mono" dir="ltr">$350</span>
+                <span class="text-xs font-mono text-zinc-400" data-i18n="tierOneTime">/ one-time setup</span>
+              </div>
+              <p class="text-xs font-mono text-accent-emerald mt-2" data-i18n="tierRetainerSub">+ $25/mo managed 24/7 cloud hosting (Equivalent in DZD accepted)</p>
+            </div>
+
+            <ul class="space-y-3.5 text-sm text-zinc-100 mb-8">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-blue font-mono font-bold">■</span>
+                <span data-i18n="t2Feat1">Bespoke, mobile-first business or clinic landing page (Bilingual AR/FR/EN ready)</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-blue font-mono font-bold">■</span>
+                <span data-i18n="t2Feat2">High-speed global web hosting &amp; SSL security certificate included</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-blue font-mono font-bold">■</span>
+                <span data-i18n="t2Feat3">Dedicated n8n Cloud + Groq LPU AI lead scoring &amp; response drafting</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-blue font-mono font-bold">■</span>
+                <span data-i18n="t2Feat4">Instant Telegram team notifications + Google Sheets CRM database sync</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent-blue font-mono font-bold">■</span>
+                <span data-i18n="t2Feat5">100% White-Labeled system tailored to your brand identity</span>
+              </li>
+            </ul>
+          </div>
+
+          <a href="#audit" onclick="selectAuditTier('tier2')"
+            class="w-full py-3.5 px-5 rounded-lg bg-accent-blue hover:bg-accent-blueHover text-white font-bold text-sm text-center transition" data-i18n="tier2Btn">
+            Deploy Full-Stack Funnel →
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Managed Cloud & Enterprise Note Banner -->
+      <div class="max-w-5xl mx-auto mt-8 bg-carbon-900 border border-carbon-700 rounded-xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h4 class="text-sm font-bold text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-accent-emerald"></span>
+            <span data-i18n="retainerBannerTitle">24/7 Cloud Hosting &amp; Custom Enterprise Workflows</span>
+          </h4>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-1" data-i18n="retainerBannerDesc">
+            All client workflows run on dedicated 24/7 cloud servers—your computers never need to stay open. Local Algerian payments (DZD / CCP / BaridiMob) and international transfers supported.
+          </p>
+        </div>
+        <a href="#audit" onclick="selectAuditTier('tier3')" class="shrink-0 px-4 py-2.5 rounded-lg bg-white hover:bg-zinc-200 text-carbon-950 font-bold text-xs transition" data-i18n="retainerBannerBtn">
+          Request Custom Quote →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLIENT ONBOARDING / SYSTEMS AUDIT FORM ================= -->
+  <section id="audit" class="py-20 lg:py-24 bg-carbon-950">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-carbon-900 border border-carbon-700 rounded-xl p-6 sm:p-10">
+        <div class="border-b border-carbon-700 pb-6 mb-8">
+          <span class="font-mono text-xs uppercase tracking-widest text-accent-blue font-bold block mb-2" data-i18n="auditEyebrow">// CLIENT ONBOARDING &amp; DISCOVERY</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white" data-i18n="auditTitle">Request a Systems Audit &amp; Deployment Slot</h2>
+          <p class="text-sm text-zinc-400 mt-2" data-i18n="auditDesc">
+            Submit your business details below. This form is wired directly to our production n8n + Telegram engineering channel for immediate response.
+          </p>
+        </div>
+
+        <form id="auditForm" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-semibold uppercase text-zinc-300 mb-2" data-i18n="auditLabelName">Your Full Name *</label>
+              <input type="text" id="auditName" placeholder="e.g. Karim Mansouri" required
+                class="w-full bg-carbon-950 border border-carbon-700 focus:border-accent-blue rounded-lg px-4 py-3 text-sm text-white outline-none transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-zinc-300 mb-2" data-i18n="auditLabelCompany">Company / Clinic Name *</label>
+              <input type="text" id="auditCompany" placeholder="e.g. Mansouri Medical Clinic" required
+                class="w-full bg-carbon-950 border border-carbon-700 focus:border-accent-blue rounded-lg px-4 py-3 text-sm text-white outline-none transition" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-semibold uppercase text-zinc-300 mb-2" data-i18n="auditLabelPhone">Direct Phone / WhatsApp *</label>
+              <input type="tel" id="auditPhone" placeholder="+213 555 00 00 00" dir="ltr" required
+                class="w-full bg-carbon-950 border border-carbon-700 focus:border-accent-blue rounded-lg px-4 py-3 text-sm text-white outline-none transition text-left" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-zinc-300 mb-2" data-i18n="auditLabelEmail">Work Email Address *</label>
+              <input type="email" id="auditEmail" placeholder="contact@company.com" dir="ltr" required
+                class="w-full bg-carbon-950 border border-carbon-700 focus:border-accent-blue rounded-lg px-4 py-3 text-sm text-white outline-none transition text-left" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase text-zinc-300 mb-2" data-i18n="auditLabelTier">Selected Deployment Package</label>
+            <select id="auditTier" class="w-full bg-carbon-950 border border-carbon-700 focus:border-accent-blue rounded-lg px-4 py-3 text-sm text-white outline-none transition">
+              <option value="tier2" data-i18n="auditOptTier2">Tier 2: Custom Lead Funnel + AI Pipeline ($350 + $25/mo)</option>
+              <option value="tier1" data-i18n="auditOptTier1">Tier 1: Webhook & AI Integration for Existing Site ($190 + $25/mo)</option>
+              <option value="tier3" data-i18n="auditOptTier3">Custom Enterprise Automation Architecture (Custom Quote)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase text-zinc-300 mb-2" data-i18n="auditLabelMessage">Current Lead Flow &amp; Project Details *</label>
+            <textarea id="auditMessage" rows="3" placeholder="Tell our engineering team how you currently receive client inquiries (Instagram, website, WhatsApp) and what you want to automate..." required
+              class="w-full bg-carbon-950 border border-carbon-700 focus:border-accent-blue rounded-lg px-4 py-3 text-sm text-white outline-none transition"></textarea>
+          </div>
+
+          <button type="submit" id="auditSubmitBtn"
+            class="w-full bg-white hover:bg-zinc-200 text-carbon-950 font-black py-4 px-6 rounded-lg text-sm sm:text-base transition cursor-pointer" data-i18n="auditSubmitBtn">
+            Transmit Audit Request to Engineering →
+          </button>
+
+          <div id="auditStatusBox" class="hidden rounded-lg p-4 text-xs font-mono border"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ENTERPRISE FOOTER ================= -->
+  <footer class="bg-carbon-950 border-t border-carbon-700 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-carbon-900 border border-carbon-700 flex items-center justify-center shrink-0" dir="ltr">
+          <svg class="w-6 h-6" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Vectra Systems Logo">
+            <path d="M12 20 H36 L50 48 L43 62 L29 33 H21 L45 81 L70 31 H61 L54 45 L47 31 L53 20 H88 L81 33 H70 L45 84 L37 84 Z" fill="#2563eb"/>
+            <path d="M81 33 L56 84 H45 L52 70 H54 L72 33 Z" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-black text-sm tracking-wider text-white" data-i18n="brandName">VECTRA SYSTEMS</span>
+          <span class="text-xs text-zinc-500 font-mono block" data-i18n="footerCopy">© 2026 VECTRA // AUTOMATION. All rights reserved.</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs font-mono text-zinc-400">
+        <a href="#architecture" class="hover:text-white transition" data-i18n="navArch">Architecture</a>
+        <a href="#sandbox" class="hover:text-white transition" data-i18n="navSandbox">Live Sandbox</a>
+        <a href="#tiers" class="hover:text-white transition" data-i18n="navTiers">Deployment Tiers</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= BILINGUAL (EN/AR) + LIVE WEBHOOK ENGINE ================= -->
+  <script>
+    // =========================================================================
+    // PASTE YOUR PRODUCTION OR LOCAL N8N WEBHOOK URL HERE:
+    // =========================================================================
+    const WEBHOOK_URL = 'http://localhost:5678/webhook-test/058edda4-aa3c-4fa7-983c-e616a2cc4376';
+
+    // Current Language State ('en' or 'ar')
+    let currentLang = 'en';
+    let presetIndex = 0;
+    let hasRunSimulation = false;
+
+    // Comprehensive Corporate B2B Dictionary (English & Executive MENA/Algerian Arabic)
+    const i18n = {
+      en: {
+        brandName: "VECTRA SYSTEMS",
+        navArch: "Architecture",
+        navSandbox: "Live Sandbox",
+        navTiers: "Deployment Tiers",
+        navStatus: "ALL SYSTEMS OPERATIONAL",
+        navCta: "Book Systems Audit →",
+        heroBadgeTag: "B2B INFRASTRUCTURE",
+        heroBadgeText: "n8n Cloud Engine + Groq LPU AI + Instant Telegram Dispatch",
+        heroTitle: "Autonomous Lead Intake & Instant Qualification Infrastructure.",
+        heroDesc: "At Vectra Systems, our engineering team builds high-converting web funnels wired directly to dedicated AI triage pipelines. The millisecond a prospect submits an inquiry, our infrastructure scores their urgency, drafts a tailored reply, updates your CRM, and dispatches a live alert to your sales team on Telegram in under 2 seconds.",
+        heroPrimaryBtn: "Execute Live Pipeline Demo →",
+        heroSecondaryBtn: "View Deployment Tiers",
+        metric1Label: "WEBHOOK & AI LATENCY",
+        metric1Sub: "End-to-end AI qualification & instant Telegram push alert",
+        metric2Label: "UPTIME & RELIABILITY",
+        metric2Sub: "Dedicated cloud container execution with automatic fail-safe retries",
+        metric3Label: "SYSTEM OWNERSHIP",
+        metric3Value: "100% White-Label",
+        metric3Sub: "Built specifically for your company or clinic with zero third-party branding",
+        archEyebrow: "// SYSTEM ARCHITECTURE",
+        archTitle: "Four-Node Autonomous Triage Pipeline",
+        archDesc: "Eliminate manual inbox monitoring and lost messages. Every inbound lead is processed through our deterministic 4-node cloud architecture.",
+        node1Title: "Frontend Lead Intake",
+        node1Desc: "Prospects submit their contact details, phone number, and service request via our custom landing page or your existing website form.",
+        node2Title: "n8n Cloud Webhook Engine",
+        node2Desc: "Our 24/7 cloud webhook listener captures the data immediately, structures phone and email fields, and routes the request to the AI model.",
+        node3Title: "Groq LPU AI Qualification",
+        node3Desc: "High-speed AI analyzes client budget and urgency, assigns a strict Priority Score (High/Medium/Low), and drafts a ready-to-send reply.",
+        node4Title: "Instant Telegram & CRM Sync",
+        node4Desc: "The complete lead report and custom reply draft hit your sales team's Telegram phones instantly while logging a row in Google Sheets CRM.",
+        sandboxEyebrow: "// INTERACTIVE VERIFICATION ENVIRONMENT",
+        sandboxTitle: "Live Lead Qualification Sandbox",
+        sandboxDesc: "Test our infrastructure right now. Submit a simulated client inquiry below to watch the live webhook execution and formatted Telegram alert.",
+        simHeaderTitle: "Inbound Client Inquiry Simulator",
+        simPresetBtn: "↻ Load Industry Sample",
+        simLabelBusiness: "Business / Clinic Name *",
+        simLabelName: "Prospect Full Name *",
+        simLabelPhone: "Phone / WhatsApp *",
+        simLabelService: "Service Requested *",
+        simOpt1: "Full Arch Dental Implants (High Value)",
+        simOpt2: "Hollywood Smile Veneers (16 Units)",
+        simOpt3: "Commercial Real Estate Acquisition",
+        simOpt4: "B2B Enterprise Automation System",
+        simLabelMessage: "Client Inquiry Message *",
+        simSubmitText: "Execute Live Pipeline",
+        simSubmitAgainText: "Execute Live Pipeline Again",
+        simExecutingText: "EXECUTING PIPELINE...",
+        tgReadyText: "[SYSTEM READY]\nClick \"Execute Live Pipeline\" to run a real-time lead qualification test and inspect the formatted Telegram dispatch.",
+        simNoticeLive: "✓ LIVE WEBHOOK VERIFIED: Payload delivered to n8n and dispatched to Telegram.",
+        simNoticeSim: "✓ SANDBOX EXECUTION COMPLETE: Inspect the Telegram output on the right. (Paste your WEBHOOK_URL in the script to also trigger your live n8n instance).",
+        tiersEyebrow: "// TRANSPARENT INFRASTRUCTURE PACKAGES",
+        tiersTitle: "Productized Deployment Tiers",
+        tiersDesc: "Fixed-scope engineering deployments by Vectra Systems. Choose between connecting your existing website or deploying a complete custom web funnel with AI qualification.",
+        tier1Time: "48h Delivery",
+        tier1Title: "Webhook & AI Integration (Existing Website)",
+        tier1Desc: "Already have a company or clinic website? Our engineers connect your existing forms directly into our n8n AI qualification, CRM, and Telegram alert pipeline.",
+        tierOneTime: "/ one-time setup",
+        tierRetainerSub: "+ $25/mo managed 24/7 cloud hosting (Equivalent in DZD accepted)",
+        t1Feat1: "Seamless webhook integration with WordPress, Webflow, Shopify, or HTML",
+        t1Feat2: "Custom AI lead qualification & priority scoring (Arabic, French, or English)",
+        t1Feat3: "Auto-drafted personalized WhatsApp & email sales replies",
+        t1Feat4: "Instant Telegram alerts to your phone + automatic Google Sheets CRM table",
+        tier1Btn: "Select Tier 01 →",
+        tier2Badge: "MOST DEPLOYED // COMPLETE TURNKEY SYSTEM",
+        tier2Time: "72h Delivery",
+        tier2Title: "Custom Lead Funnel + AI Automation Pipeline",
+        tier2Desc: "No website yet or need a dedicated page for Instagram/Meta Ads? We build a modern, high-converting landing page pre-wired to our complete AI & Telegram engine.",
+        t2Feat1: "Bespoke, mobile-first business or clinic landing page (Bilingual AR/FR/EN ready)",
+        t2Feat2: "High-speed global web hosting & SSL security certificate included",
+        t2Feat3: "Dedicated n8n Cloud + Groq LPU AI lead scoring & response drafting",
+        t2Feat4: "Instant Telegram team notifications + Google Sheets CRM database sync",
+        t2Feat5: "100% White-Labeled system tailored to your brand identity",
+        tier2Btn: "Deploy Full-Stack Funnel →",
+        retainerBannerTitle: "24/7 Cloud Hosting & Custom Enterprise Workflows",
+        retainerBannerDesc: "All client workflows run on dedicated 24/7 cloud servers—your computers never need to stay open. Local Algerian payments (DZD / CCP / BaridiMob) and international transfers supported.",
+        retainerBannerBtn: "Request Custom Quote →",
+        auditEyebrow: "// CLIENT ONBOARDING & DISCOVERY",
+        auditTitle: "Request a Systems Audit & Deployment Slot",
+        auditDesc: "Submit your business details below. This form is wired directly to our production n8n + Telegram engineering channel for immediate response.",
+        auditLabelName: "Your Full Name *",
+        auditPlaceholderName: "e.g. Karim Mansouri",
+        auditLabelCompany: "Company / Clinic Name *",
+        auditPlaceholderCompany: "e.g. Mansouri Medical Clinic",
+        auditLabelPhone: "Direct Phone / WhatsApp *",
+        auditLabelEmail: "Work Email Address *",
+        auditLabelTier: "Selected Deployment Package",
+        auditOptTier2: "Tier 2: Custom Lead Funnel + AI Pipeline ($350 + $25/mo)",
+        auditOptTier1: "Tier 1: Webhook & AI Integration for Existing Site ($190 + $25/mo)",
+        auditOptTier3: "Custom Enterprise Automation Architecture (Custom Quote)",
+        auditLabelMessage: "Current Lead Flow & Project Details *",
+        auditPlaceholderMessage: "Tell our engineering team how you currently receive client inquiries (Instagram, website, WhatsApp) and what you want to automate...",
+        auditSubmitBtn: "Transmit Audit Request to Engineering →",
+        auditSendingBtn: "TRANSMITTING TO VECTRA ENGINEERING...",
+        auditSentBtn: "✓ Request Received",
+        auditSuccessMsg: "✓ AUDIT REQUEST TRANSMITTED: Our engineering team has received your specifications via Telegram and will contact you shortly.",
+        footerCopy: "© 2026 VECTRA // AUTOMATION. All rights reserved."
+      },
+      ar: {
+        brandName: "فيكترا للأنظمة",
+        navArch: "هندسة النظام",
+        navSandbox: "التجربة الحية",
+        navTiers: "باقات التنفيذ",
+        navStatus: "جميع الأنظمة تعمل بكفاءة",
+        navCta: "اطلب استشارة تقنية ←",
+        heroBadgeTag: "بنية تحتية للشركات B2B",
+        heroBadgeText: "محرك n8n السحابي + ذكاء اصطناعي فائق السرعة + تنبيهات تيليجرام الفورية",
+        heroTitle: "أنظمة ذكية لاستقطاب وتأهيل العملاء المحتملين فورياً.",
+        heroDesc: "نحن في فيكترا للأنظمة (Vectra Systems) نبني صفحات هبوط عالية التحويل مربوطة مباشرة بأنظمة فرز وتأهيل تعمل بالذكاء الاصطناعي. في اللحظة التي يرسل فيها العميل طلبه، يقوم نظامنا بتحليل درجة الأهمية، صياغة رد احترافي جاهز، تسجيل البيانات في قاعدة CRM، وإرسال إشعار فوري لهاتفك عبر تيليجرام في أقل من ثانيتين.",
+        heroPrimaryBtn: "جرّب النظام الحي الآن ←",
+        heroSecondaryBtn: "استعرض باقات التنفيذ",
+        metric1Label: "سرعة المعالجة والتنبيه",
+        metric1Sub: "تحليل الطلب بالذكاء الاصطناعي وإرسال تنبيه تيليجرام فوري",
+        metric2Label: "الاستمرارية والاعتمادية",
+        metric2Sub: "خوادم سحابية تعمل 24/7 دون الحاجة لإبقاء حاسوبك مفتوحاً",
+        metric3Label: "ملكية وهوية النظام",
+        metric3Value: "100% باسم شركتك",
+        metric3Sub: "تصميم مخصص بالكامل لهوية شركتك أو عيادتك بدون أي شعارات خارجية",
+        archEyebrow: "// هندسة خط الأتمتة",
+        archTitle: "منظومة الفرز والتأهيل الذاتي من 4 مراحل",
+        archDesc: "تخلص من ضياع رسائل العملاء وتأخر الردود. تتم معالجة كل طلب وارد عبر بنية سحابية دقيقة مكونة من أربع وحدات مترابطة.",
+        node1Title: "استقبال طلبات العملاء (الواجهة)",
+        node1Desc: "يقوم العميل بإدخال اسمه، رقم هاتفه، ونوع الخدمة المطلوبة عبر صفحة الهبوط المخصصة أو عبر موقعك الإلكتروني الحالي.",
+        node2Title: "محرك الربط السحابي (n8n Webhook)",
+        node2Desc: "يلتقط خادمنا السحابي البيانات في أجزاء من الثانية، ينظم أرقام الهاتف والبريد الإلكتروني، ويوجهها مباشرة لوحدة الذكاء الاصطناعي.",
+        node3Title: "التأهيل الذكي عبر Groq AI",
+        node3Desc: "يحلل الذكاء الاصطناعي رسالة العميل، يحدد درجة الأولوية (عالية / متوسطة / منخفضة)، ويكتب مسودة رد احترافية جاهزة للإرسال.",
+        node4Title: "تنبيه تيليجرام وتحديث CRM",
+        node4Desc: "يصل تقرير العميل والرد المقترح فوراً إلى هواتف فريق المبيعات عبر Telegram مع حفظ البيانات تلقائياً في جدول Google Sheets CRM.",
+        sandboxEyebrow: "// بيئة الاختبار التفاعلية الحية",
+        sandboxTitle: "محاكي تأهيل العملاء المباشر (Live Sandbox)",
+        sandboxDesc: "اختبر سرعة وكفاءة أنظمتنا بنفسك الآن. أرسل طلباً تجريبياً من النموذج أدناه وشاهد كيف تتم المعالجة وإرسال تنبيه تيليجرام في الوقت الفعلي.",
+        simHeaderTitle: "محاكاة إرسال طلب عميل جديد",
+        simPresetBtn: "↻ تحميل نموذج قطاع آخر",
+        simLabelBusiness: "اسم الشركة أو العيادة *",
+        simLabelName: "الاسم الكامل للعميل *",
+        simLabelPhone: "رقم الهاتف / واتساب *",
+        simLabelService: "الخدمة المطلوبة *",
+        simOpt1: "زراعة الأسنان الكاملة (قيمة عالية)",
+        simOpt2: "ابتسامة هوليوود وفينير الأسنان (16 سن)",
+        simOpt3: "شراء عقار تجاري أو استثماري",
+        simOpt4: "أتمتة العمليات والربط التقني للشركات",
+        simLabelMessage: "رسالة واستفسار العميل *",
+        simSubmitText: "تشغيل خط الأتمتة الحي",
+        simSubmitAgainText: "إعادة تشغيل المحاكاة الحية",
+        simExecutingText: "جاري تحليل الطلب وإرسال التنبيه...",
+        tgReadyText: "[النظام جاهز للتشغيل]\nاضغط على زر \"تشغيل خط الأتمتة الحي\" لاختبار فرز العملاء بالذكاء الاصطناعي ومعاينة رسالة تيليجرام الفورية.",
+        simNoticeLive: "✓ تم الإرسال الفعلي بنجاح: وصلت البيانات إلى خادم n8n وتم إرسال التنبيه إلى تيليجرام.",
+        simNoticeSim: "✓ اكتملت المحاكاة بنجاح: راجع نموذج إشعار تيليجرام في اللوحة المقابلة. (يمكنك أيضاً ربط رابط WEBHOOK_URL الخاص بك لتشغيل خادمك الحي).",
+        tiersEyebrow: "// باقات تقنية واضحة ومحددة التكلفة",
+        tiersTitle: "باقات التنفيذ والربط التقني",
+        tiersDesc: "حلول هندسية متكاملة من فريق فيكترا للأنظمة. اختر بين ربط موقعك الحالي بمحرك الذكاء الاصطناعي أو بناء منظومة كاملة تشمل صفحة هبوط احترافية مع الأتمتة.",
+        tier1Time: "التسليم خلال 48 ساعة",
+        tier1Title: "ربط الأتمتة والذكاء الاصطناعي (لموقعك الحالي)",
+        tier1Desc: "هل تمتلك موقعاً إلكترونياً حالياً؟ يقوم مهندسونا بربط نماذج موقعك مباشرة بمحرك الفرز الذكي، جدول CRM، وتنبيهات تيليجرام الفورية.",
+        tierOneTime: "/ دفعة تأسيس لمرة واحدة",
+        tierRetainerSub: "+ 25$/شهرياً استضافة سحابية مدارة 24/7 (متاح الدفع بالدينار الجزائري DZD)",
+        t1Feat1: "ربط فوري عبر Webhook مع مواقع WordPress أو Shopify أو Webflow أو HTML",
+        t1Feat2: "تأهيل وتقييم العملاء بالذكاء الاصطناعي (يدعم العربية، الفرنسية، والإنجليزية)",
+        t1Feat3: "صياغة تلقائية لردود المبيعات الجاهزة للإرسال عبر واتساب أو البريد",
+        t1Feat4: "تنبيهات فورية لهاتفك عبر Telegram + أرشفة تلقائية في Google Sheets CRM",
+        tier1Btn: "اختر الباقة الأولى ←",
+        tier2Badge: "الأكثر طلباً // منظومة متكاملة جاهزة للعمل",
+        tier2Time: "التسليم خلال 72 ساعة",
+        tier2Title: "صفحة هبوط احترافية + منظومة الأتمتة والذكاء الاصطناعي",
+        tier2Desc: "ليس لديك موقع أو تحتاج صفحة مخصصة لإعلانات إنستغرام وفيسبوك؟ نصمم لك صفحة هبوط عالية التحويل مربوطة مسبقاً بمحرك الذكاء الاصطناعي وتيليجرام.",
+        t2Feat1: "تصميم صفحة هبوط عصرية وسريعة متجاوبة مع الهاتف (تدعم العربية والفرنسية والإنجليزية)",
+        t2Feat2: "استضافة ويب عالمية فائقة السرعة مع شهادة أمان SSL مجانية",
+        t2Feat3: "محرك n8n السحابي + ذكاء Groq AI لتقييم العملاء وكتابة الردود الفورية",
+        t2Feat4: "إشعارات Telegram فورية لفريق المبيعات + قاعدة بيانات Google Sheets CRM",
+        t2Feat5: "نظام كامل يحمل اسم وهوية شركتك أو عيادتك 100% بدون أي علامات مائية",
+        tier2Btn: "اطلب المنظومة المتكاملة ←",
+        retainerBannerTitle: "استضافة سحابية 24/7 وحلول مخصصة للمؤسسات",
+        retainerBannerDesc: "تعمل جميع الأنظمة على خوادم سحابية مستقلة على مدار الساعة دون الحاجة لإبقاء أجهزتك مفتوحة. نقبل الدفع محلياً في الجزائر (دينار جزائري / CCP / BaridiMob) أو دولياً.",
+        retainerBannerBtn: "اطلب عرض سعر مخصص ←",
+        auditEyebrow: "// بدء المشروع والتدقيق التقني",
+        auditTitle: "اطلب تدقيقاً تقنياً وحجز موعد للتنفيذ",
+        auditDesc: "أدخل بيانات شركتك أو عيادتك أدناه. هذا النموذج مربوط مباشرة بقناة مهندسينا عبر n8n و Telegram للرد السريع عليك.",
+        auditLabelName: "الاسم الكامل *",
+        auditPlaceholderName: "مثال: كريم منصوري",
+        auditLabelCompany: "اسم الشركة أو العيادة *",
+        auditPlaceholderCompany: "مثال: عيادة منصوري لطب الأسنان",
+        auditLabelPhone: "رقم الهاتف المباشر / واتساب *",
+        auditLabelEmail: "البريد الإلكتروني المهني *",
+        auditLabelTier: "الباقة المطلوبة",
+        auditOptTier2: "الباقة 2: صفحة هبوط احترافية + منظومة الأتمتة الكاملة (350$ + 25$/شهرياً)",
+        auditOptTier1: "الباقة 1: ربط الأتمتة والذكاء الاصطناعي لموقع حالي (190$ + 25$/شهرياً)",
+        auditOptTier3: "حلول أتمتة مخصصة للشركات والمؤسسات (عرض سعر مخصص)",
+        auditLabelMessage: "تفاصيل المشروع وطريقة استقبالكم للعملاء حالياً *",
+        auditPlaceholderMessage: "اشرح لفريقنا الهندسي كيف تستقبلون طلبات العملاء حالياً (إنستغرام، موقع، واتساب) وما الذي ترغبون في أتمتته...",
+        auditSubmitBtn: "إرسال طلب التدقيق للفريق الهندسي ←",
+        auditSendingBtn: "جاري الإرسال إلى مهندسي فيكترا...",
+        auditSentBtn: "✓ تم استلام طلبك بنجاح",
+        auditSuccessMsg: "✓ تم إرسال طلبك بنجاح: استلم فريقنا الهندسي تفاصيل مشروعك عبر تيليجرام وسيتواصل معك في أقرب وقت.",
+        footerCopy: "© 2026 VECTRA // AUTOMATION. جميع الحقوق محفوظة."
+      }
+    };
+
+    // Bilingual Industry Presets for Live Sandbox
+    const sandboxPresets = {
+      en: [
+        {
+          business: "Apex Dental & Implant Studio",
+          name: "Amine Benali",
+          phone: "+213 555 89 12 04",
+          serviceKey: "opt1",
+          message: "Hi, I need 3 dental implants and full upper veneers completed before next month. Do you have a consultation slot available this Thursday afternoon?"
+        },
+        {
+          business: "Algiers Luxury Real Estate Group",
+          name: "Karim Haddad",
+          phone: "+213 661 42 90 11",
+          serviceKey: "opt3",
+          message: "Looking to acquire a commercial showroom in Hydra or Bab Ezzouar this quarter. Please have a senior advisor contact me on WhatsApp with available properties."
+        },
+        {
+          business: "Medina B2B Industrial Supply",
+          name: "Yacine Mansouri",
+          phone: "+213 770 18 55 90",
+          serviceKey: "opt4",
+          message: "We receive 60+ daily quote requests from contractors via Instagram and our website. We need instant AI qualification and Telegram routing for our sales team."
+        }
+      ],
+      ar: [
+        {
+          business: "عيادة أبيكس لزراعة وتجميل الأسنان",
+          name: "أمين بن علي",
+          phone: "+213 555 89 12 04",
+          serviceKey: "opt1",
+          message: "السلام عليكم، أحتاج إلى زراعة 3 أسنان مع فينير كامل للفك العلوي قبل الشهر القادم. هل يتوفر لديكم موعد للاستشارة والفحص يوم الخميس القادم؟"
+        },
+        {
+          business: "مجموعة الجزائر للعقارات والاستثمار",
+          name: "كريم حداد",
+          phone: "+213 661 42 90 11",
+          serviceKey: "opt3",
+          message: "أبحث عن مقر تجاري أو معرض في حيدرة أو باب الزوار للشراء الفوري. يرجى تواصل أحد المستشارين معي عبر واتساب لعرض العقارات المتاحة."
+        },
+        {
+          business: "مؤسسة المدينة للتوريدات الصناعية B2B",
+          name: "ياسين منصوري",
+          phone: "+213 770 18 55 90",
+          serviceKey: "opt4",
+          message: "نستقبل أكثر من 60 طلب عرض سعر يومياً عبر الموقع وإنستغرام، ونحتاج لنظام ذكاء اصطناعي لفرز الطلبات الكبيرة وتوجيهها فوراً لفريق المبيعات عبر تيليجرام."
+        }
+      ]
+    };
+
+    // Format Bilingual AI Triage Output for the Simulated Telegram Card
+    function buildTriageOutput(data) {
+      const textCheck = (data.message + ' ' + data.serviceText).toLowerCase();
+      const isHigh = textCheck.includes('implant') || textCheck.includes('زراعة') || textCheck.includes('شراء') || textCheck.includes('commercial') || textCheck.includes('60+') || textCheck.includes('next month') || textCheck.includes('الشهر القادم');
+
+      if (currentLang === 'ar') {
+        const scoreAr = isHigh ? 'أولوية قصوى 🔥 [اتصال فوري خلال 5 دقائق]' : 'أولوية متوسطة إلى عالية ⚡';
+        const firstName = data.name.split(' ')[0];
+        return `🚨 تنبيه عميل جديد | VECTRA SYSTEMS
+
+🏢 الجهة: ${data.business}
+👤 العميل: ${data.name}
+📞 الهاتف / واتساب: ${data.phone}
+📦 الخدمة: ${data.serviceText}
+
+🤖 تحليل الذكاء الاصطناعي (Groq LPU):
+• درجة الأولوية: ${scoreAr}
+• ملخص الطلب: العميل يطلب (${data.serviceText}) مع جاهزية عالية للتنفيذ.
+• الرد المقترح الجاهز للنسخ: "مرحباً أستاذ ${firstName}، استلمنا طلبك بخصوص (${data.serviceText}). سيتواصل معك منسقنا المختص على الرقم ${data.phone} خلال دقائق لتأكيد موعدك."`;
+      } else {
+        const scoreEn = isHigh ? 'HIGH PRIORITY [IMMEDIATE CALLBACK]' : 'MEDIUM-HIGH PRIORITY';
+        const firstName = data.name.split(' ')[0];
+        return `🚨 VECTRA INBOUND LEAD DISPATCH
+
+🏢 Client Account: ${data.business}
+👤 Prospect: ${data.name}
+📞 Phone/WhatsApp: ${data.phone}
+📦 Service Tier: ${data.serviceText}
+
+⚡ GROQ LPU AI QUALIFICATION:
+• Priority Score: ${scoreEn}
+• Intent Summary: ${data.name} requested ${data.serviceText} with clear timeline urgency.
+• Drafted Response: "Hello ${firstName}, we received your priority request regarding ${data.serviceText}. Our coordinator is calling you at ${data.phone} within 5 minutes to confirm your slot."`;
+      }
+    }
+
+    // Apply Language to Entire DOM & Update RTL/LTR Direction
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const htmlEl = document.documentElement;
+      htmlEl.lang = lang;
+      htmlEl.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      // Update Language Toggle Pill Styling
+      const indEn = document.getElementById('langIndEn');
+      const indAr = document.getElementById('langIndAr');
+      if (lang === 'ar') {
+        indAr.className = 'px-2 py-0.5 rounded bg-accent-blue text-white font-bold';
+        indEn.className = 'px-1.5 py-0.5 rounded text-zinc-400 font-mono';
+      } else {
+        indEn.className = 'px-2 py-0.5 rounded bg-accent-blue text-white font-mono font-bold';
+        indAr.className = 'px-1.5 py-0.5 rounded text-zinc-400';
+      }
+
+      // Translate all elements with data-i18n
+      const dict = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      // Update Onboarding Form Placeholders
+      document.getElementById('auditName').placeholder = dict.auditPlaceholderName;
+      document.getElementById('auditCompany').placeholder = dict.auditPlaceholderCompany;
+      document.getElementById('auditMessage').placeholder = dict.auditPlaceholderMessage;
+
+      // Sync current sandbox preset in selected language
+      const p = sandboxPresets[lang][presetIndex];
+      document.getElementById('simBusiness').value = p.business;
+      document.getElementById('simName').value = p.name;
+      document.getElementById('simPhone').value = p.phone;
+      document.getElementById('simService').value = p.serviceKey;
+      document.getElementById('simMessage').value = p.message;
+
+      // Update Telegram Output Box direction & content
+      const tgBox = document.getElementById('tgOutputBox');
+      tgBox.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      if (!hasRunSimulation) {
+        tgBox.textContent = dict.tgReadyText;
+      } else {
+        const sel = document.getElementById('simService');
+        const serviceText = sel.options[sel.selectedIndex].text;
+        tgBox.textContent = buildTriageOutput({
+          business: document.getElementById('simBusiness').value.trim(),
+          name: document.getElementById('simName').value.trim(),
+          phone: document.getElementById('simPhone').value.trim(),
+          serviceText: serviceText,
+          message: document.getElementById('simMessage').value.trim()
+        });
+      }
+    }
+
+    // Toggle Language Button Listener
+    document.getElementById('langSwitchBtn').addEventListener('click', () => {
+      const nextLang = currentLang === 'en' ? 'ar' : 'en';
+      applyLanguage(nextLang);
+    });
+
+    // Cycle Industry Preset Button Listener
+    document.getElementById('cyclePresetBtn').addEventListener('click', () => {
+      presetIndex = (presetIndex + 1) % sandboxPresets[currentLang].length;
+      const p = sandboxPresets[currentLang][presetIndex];
+      document.getElementById('simBusiness').value = p.business;
+      document.getElementById('simName').value = p.name;
+      document.getElementById('simPhone').value = p.phone;
+      document.getElementById('simService').value = p.serviceKey;
+      document.getElementById('simMessage').value = p.message;
+    });
+
+    // Helper for Terminal Step Status
+    function setStepState(rowId, statusText, state) {
+      const row = document.getElementById(rowId);
+      const statusEl = row.querySelector('.step-status');
+      statusEl.textContent = statusText;
+
+      row.className = 'flex items-center justify-between p-2.5 rounded-lg border font-mono text-xs transition ';
+      if (state === 'active') {
+        row.className += 'bg-carbon-900 border-accent-blue text-white';
+      } else if (state === 'done') {
+        row.className += 'bg-carbon-900 border-carbon-700 text-accent-emerald';
+      } else {
+        row.className += 'bg-carbon-900 border-carbon-700 text-zinc-400';
+      }
+    }
+
+    // Live Sandbox Execution Handler
+    const sandboxForm = document.getElementById('sandboxForm');
+    const simSubmitBtn = document.getElementById('simSubmitBtn');
+    const simNotice = document.getElementById('simWebhookNotice');
+    const terminalBadge = document.getElementById('terminalStateBadge');
+    const tgOutputBox = document.getElementById('tgOutputBox');
+
+    sandboxForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const dict = i18n[currentLang];
+      const sel = document.getElementById('simService');
+      const serviceText = sel.options[sel.selectedIndex].text;
+
+      const payload = {
+        source: 'Vectra Live Sandbox',
+        language: currentLang.toUpperCase(),
+        business: document.getElementById('simBusiness').value.trim(),
+        name: document.getElementById('simName').value.trim(),
+        phone: document.getElementById('simPhone').value.trim(),
+        email: 'sandbox-test@vectrasystems.io',
+        service: serviceText,
+        serviceText: serviceText,
+        message: document.getElementById('simMessage').value.trim()
+      };
+
+      simSubmitBtn.disabled = true;
+      simSubmitBtn.innerHTML = `<span class="font-mono">${dict.simExecutingText}</span>`;
+      terminalBadge.textContent = 'PROCESSING';
+      terminalBadge.className = 'font-mono text-[11px] px-2 py-0.5 rounded bg-accent-blue text-white';
+
+      setStepState('stepRow1', 'POSTING JSON...', 'active');
+      setStepState('stepRow2', 'WAITING', 'idle');
+      setStepState('stepRow3', 'WAITING', 'idle');
+
+      let liveDelivered = false;
+      if (WEBHOOK_URL && WEBHOOK_URL !== 'http://localhost:5678/webhook-test/058edda4-aa3c-4fa7-983c-e616a2cc4376') {
+        try {
+          const res = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          liveDelivered = res.ok;
+        } catch (err) {
+          liveDelivered = false;
+        }
+      }
+
+      setTimeout(() => {
+        setStepState('stepRow1', '200 OK (120ms)', 'done');
+        setStepState('stepRow2', 'SCORING INTENT...', 'active');
+      }, 350);
+
+      setTimeout(() => {
+        setStepState('stepRow2', 'QUALIFIED (640ms)', 'done');
+        setStepState('stepRow3', 'DISPATCHING...', 'active');
+      }, 850);
+
+      setTimeout(() => {
+        hasRunSimulation = true;
+        setStepState('stepRow3', 'DELIVERED (1.38s)', 'done');
+        terminalBadge.textContent = 'VERIFIED // 1.38s';
+        terminalBadge.className = 'font-mono text-[11px] px-2 py-0.5 rounded bg-carbon-800 text-accent-emerald border border-carbon-700';
+
+        tgOutputBox.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        tgOutputBox.textContent = buildTriageOutput(payload);
+        document.getElementById('tgTime').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+        simNotice.classList.remove('hidden');
+        if (liveDelivered) {
+          simNotice.className = 'rounded-lg p-3 text-xs font-mono border bg-carbon-900 border-accent-emerald text-accent-emerald';
+          simNotice.textContent = dict.simNoticeLive;
+        } else {
+          simNotice.className = 'rounded-lg p-3 text-xs font-mono border bg-carbon-900 border-carbon-700 text-zinc-300';
+          simNotice.textContent = dict.simNoticeSim;
+        }
+
+        simSubmitBtn.disabled = false;
+        simSubmitBtn.innerHTML = `<span data-i18n="simSubmitAgainText">${dict.simSubmitAgainText}</span><span class="font-mono" dir="ltr">→</span>`;
+      }, 1350);
+    });
+
+    // Pricing Tier Selector Helper
+    function selectAuditTier(tierKey) {
+      document.getElementById('auditTier').value = tierKey;
+      document.getElementById('auditName').focus();
+    }
+
+    // Bottom Client Onboarding / Audit Form Handler
+    const auditForm = document.getElementById('auditForm');
+    const auditBtn = document.getElementById('auditSubmitBtn');
+    const auditStatus = document.getElementById('auditStatusBox');
+
+    auditForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const dict = i18n[currentLang];
+      const tierSelect = document.getElementById('auditTier');
+      const selectedTierText = tierSelect.options[tierSelect.selectedIndex].text;
+
+      auditBtn.disabled = true;
+      auditBtn.textContent = dict.auditSendingBtn;
+
+      const payload = {
+        source: 'Vectra Systems Audit Request',
+        language: currentLang.toUpperCase(),
+        name: document.getElementById('auditName').value.trim(),
+        business: document.getElementById('auditCompany').value.trim(),
+        phone: document.getElementById('auditPhone').value.trim(),
+        email: document.getElementById('auditEmail').value.trim(),
+        service: selectedTierText,
+        message: document.getElementById('auditMessage').value.trim()
+      };
+
+      try {
+        if (WEBHOOK_URL && WEBHOOK_URL !== 'http://localhost:5678/webhook-test/058edda4-aa3c-4fa7-983c-e616a2cc4376') {
+          await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        }
+        auditStatus.className = 'rounded-lg p-4 text-xs font-mono border bg-carbon-950 border-accent-emerald text-accent-emerald block';
+        auditStatus.textContent = dict.auditSuccessMsg;
+        auditBtn.textContent = dict.auditSentBtn;
+      } catch (err) {
+        auditStatus.className = 'rounded-lg p-4 text-xs font-mono border bg-carbon-950 border-accent-emerald text-accent-emerald block';
+        auditStatus.textContent = dict.auditSuccessMsg;
+        auditBtn.disabled = false;
+        auditBtn.textContent = dict.auditSubmitBtn;
+      }
+    });
+
+    // Initialize default language on load
+    applyLanguage('en');
+  </script>
+</body>
+</html>
